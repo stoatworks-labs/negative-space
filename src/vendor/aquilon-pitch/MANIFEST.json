@@ -1,0 +1,14 @@
+{
+  "upstream": "stoatworks-labs/aquilon-pitch",
+  "path": "src/lib",
+  "commit": "8d8eed64adb1e5067edbda181dbc284d2a203aa4",
+  "synced": "2026-08-27",
+  "files": {
+    "awj.ts": "4a0482351d3e6c3b17d15ac0672d725bc585023783412b287142b8739c8fe809",
+    "device.ts": "e7226209d44196d546c98f5339642609a6730331ad3421974a5595d0a33a47b2",
+    "index.ts": "800202dd3167c0c0274c256d6529116236ecffb5b59d839d06701ccfd4731f04",
+    "pitch.ts": "24fc3dda4122d2e39d86b14a503d5484019545c44118b9336237d546fe9e172d",
+    "types.ts": "49b476aa1b158b067be2d8c36d53e9f06de3e8e45b2c40a03ca588157d9879ba",
+    "urlstate.ts": "b38522823cd0739261b491c04249c8961d000bf4832dea9ff40924bedf172fc7"
+  }
+}

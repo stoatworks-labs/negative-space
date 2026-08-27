@@ -32,6 +32,8 @@ offsetting every slice by the running total. That is the job this does.
 - **PowerPoint slide geometry**, plus a starter `.pptx` with the surfaces and gaps drawn on it.
 - **CSV** of every surface and gap, and a **JSON project file** to save and reload.
 - **A PDF report** with a scale plan of the canvas, for taking to site.
+- **LivePremier pitch compensation** — the H and V ratios an Analog Way Aquilon needs to
+  drive surfaces of different pitches from one screen.
 
 ## Using it
 
@@ -40,6 +42,32 @@ and click any gap to set its spacing exactly. Mixed pitches are handled: the can
 to the finest pitch present, so no surface is ever asked to show fewer pixels than it has.
 
 See [docs/USER-GUIDE.md](docs/USER-GUIDE.md).
+
+## LivePremier pitch compensation
+
+If the array is going on an Analog Way **LivePremier**, one screen spanning surfaces of
+different pitches needs each output told how much canvas its raster is worth — or a layer
+crossing between them changes physical size as it goes. The panel gives the two numbers
+per surface, for **Preconfig > Canvas > Pitch**.
+
+The arithmetic is [aquilon-pitch](https://github.com/stoatworks-labs/aquilon-pitch)'s
+engine, vendored as source into `src/vendor/aquilon-pitch/`. It carries four things about
+the device that are easy to get backwards and still look right, each established there by
+driving a simulator rather than reading the manual: the ratio **multiplies** a raster to
+give its canvas footprint, so a **coarser** wall goes **above** 1.000; the field is an
+integer in thousandths, 0.100 to 10.000; an out-of-range write is **discarded**, not
+clamped; and the footprint **floors**.
+
+**The ratios are right; the positions are not sent anywhere.** A LivePremier lays its
+canvas out from each output's own area of interest, which this tool cannot reach into — so
+the gaps that are the entire point of a Negative Space canvas still have to be built there
+by hand, from the canvas rectangles shown beside each ratio.
+
+One thing worth watching: those ratios are always built on the **finest** pitch, because a
+reference below 1.000 would set the whole screen upscaling. If the project's canvas pitch
+is set to `coarsest` or a manual value, the two canvases are different sizes and the panel
+says so — the rectangles it shows are rescaled to match the ratios, and are deliberately
+not the pixel numbers shown elsewhere on the page.
 
 ## Development
 

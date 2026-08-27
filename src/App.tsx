@@ -7,6 +7,7 @@ import { buildPptx, slideGeometry } from './lib/office'
 import { exportResolumeXml } from './lib/resolume'
 import { fromProjectFile, toCsv, toProjectFile } from './lib/exports'
 import { PANEL_PRESETS, wallFromPanels } from './lib/panels'
+import { planLivePremier, referenceRects } from './lib/livepremier'
 import { int, pct, pitchLabel } from './lib/units'
 import type { CanvasPitch, Gutter, Project, Surface } from './types'
 
@@ -45,6 +46,11 @@ export default function App() {
   const [busy, setBusy] = useState<string | null>(null)
 
   const design = useMemo(() => solve(project), [project])
+  const livePremier = useMemo(() => planLivePremier(design), [design])
+  const lpRects = useMemo(
+    () => (livePremier ? referenceRects(design, livePremier) : []),
+    [design, livePremier],
+  )
   const geom = useMemo(() => slideGeometry(design), [design])
 
   useEffect(() => {
@@ -531,6 +537,79 @@ export default function App() {
                 : 'One canvas pixel per 1/96 inch — the slide is 1:1 with the canvas.'}
             </p>
           </section>
+
+          {livePremier && livePremier.result.groups.length > 1 && (
+            <section className="block">
+              <h2>LivePremier pitch compensation</h2>
+              <p className="hint">
+                What to type into an Analog Way LivePremier at{' '}
+                <b>Preconfig &gt; Canvas &gt; Pitch</b> so one screen can span these
+                surfaces without a layer changing size as it crosses between them.
+              </p>
+              <table className="lp-table">
+                <thead>
+                  <tr>
+                    <th>Surface</th>
+                    <th>Raster</th>
+                    <th>H Ratio</th>
+                    <th>V Ratio</th>
+                    <th>Canvas rect</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {livePremier.result.groups.map((g) => {
+                    const rect = lpRects.find((r) => r.id === g.group.id)
+                    const bad = g.h.outOfRange || g.v.outOfRange
+                    return (
+                      <tr key={g.group.id} className={g.isReference ? 'is-ref' : undefined}>
+                        <td>
+                          {g.group.name}
+                          {g.isReference && <span className="tag note">ref</span>}
+                        </td>
+                        <td>
+                          {g.group.pxWidth} × {g.group.pxHeight}
+                        </td>
+                        <td className={bad ? 'bad' : undefined}>
+                          {g.h.outOfRange ? `${g.h.exact.toFixed(3)} ✕` : g.h.ratio.toFixed(3)}
+                        </td>
+                        <td className={bad ? 'bad' : undefined}>
+                          {g.v.outOfRange ? `${g.v.exact.toFixed(3)} ✕` : g.v.ratio.toFixed(3)}
+                        </td>
+                        <td>
+                          {bad || !rect
+                            ? '—'
+                            : `${rect.w} × ${rect.h} at ${rect.x}, ${rect.y}`}
+                        </td>
+                      </tr>
+                    )
+                  })}
+                </tbody>
+              </table>
+              {!livePremier.canvasesAgree && (
+                <p className="hint warn">
+                  These ratios are built on the finest pitch ({pitchLabel(livePremier.referencePitchMm)}),
+                  not this project&rsquo;s canvas pixel ({pitchLabel(livePremier.projectPitchMm)}) — a
+                  reference below 1.000 would set the whole screen upscaling. The canvas
+                  rectangles above are rescaled to match the ratios, so they are{' '}
+                  <b>not</b> the pixel numbers shown elsewhere on this page.
+                </p>
+              )}
+              <p className="hint">
+                The ratios are right; the <b>positions</b> are still yours to set. This tool
+                cannot reach into the outputs&rsquo; own areas of interest, and the gaps that
+                make up a Negative Space canvas have to be built there by hand.
+              </p>
+              {/* Notes included on purpose: when every ratio is 1.000 the engine
+                  says so, and a section that explained nothing would read as a
+                  feature that had not worked. */}
+              {livePremier.result.warnings
+                .map((w, i) => (
+                  <p key={i} className={`hint ${w.level === 'error' ? 'bad' : 'warn'}`}>
+                    {w.message}
+                  </p>
+                ))}
+            </section>
+          )}
 
           {design.diagnostics.length > 0 && (
             <section className="block">

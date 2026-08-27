@@ -62,3 +62,38 @@ assertion was wrong. Now pinned by a test named in capitals so nobody "fixes" it
 - Guide SVGs rasterised and inspected.
 - Full CSP check with `scripts/serve-dist.py`: first render plus all eight exports, zero
   console output.
+
+
+## LivePremier pitch compensation
+
+Added 2026-08-27. `src/lib/livepremier.ts`, on
+[aquilon-pitch](https://github.com/stoatworks-labs/aquilon-pitch)'s engine vendored into
+`src/vendor/aquilon-pitch/`.
+
+**Why it fits here at all.** This tool already computes the two things the feature needs:
+a canvas pixel is the finest pitch present, and each surface's `scaleX`/`scaleY` is
+`rect.w / pxWidth` — which *is* the ratio a LivePremier wants. What it did not have was the
+device's half of it: three decimal places, a 0.100–10.000 range, a write that is discarded
+rather than clamped when it falls outside, and a footprint that **floors**. Those four came
+from driving a simulator in the other repo, and they are the reason the engine is copied in
+rather than the ratio being computed here in one line.
+
+**⚠️ The reference is always the finest pitch, whatever `project.pitch` says.** A `coarsest`
+or `manual` canvas is a perfectly good thing for a composition and a bad thing to send to a
+video wall: no surface would sit at 1.000 and the whole screen would upscale. So the plan
+keeps the sane reference and `canvasesAgree` reports the mismatch. The consequence people
+will trip on: when they disagree, `PlacedSurface.rect` is in a **different scale** from the
+ratios, and reading one against the other silently mixes two canvases. `referenceRects()`
+exists to stop that, and the panel says so on screen.
+
+**⚠️ What this feature does NOT do.** It emits no positions to the device. A LivePremier
+lays its screen canvas out from each output's own area of interest, which nothing here can
+reach — so the gaps that are the entire point of this tool still have to be built by hand on
+the switcher. The ratios are the deliverable; the rectangles are a reference for doing the
+rest yourself. Saying so in the UI rather than only here was deliberate.
+
+**Vendoring shape.** TypeScript source with a per-file `MANIFEST.json`, not the bundled
+build — this repo is TypeScript and keeps the types. livepremier-plus, which is plain
+JavaScript, vendors aquilon-pitch's `dist-lib/` bundle instead. Two shapes of one engine,
+each hash-checked. `urlstate.ts` comes along in the copy because the copy is faithful to
+`src/lib/`; it is not part of the engine's public API and nothing here imports it.

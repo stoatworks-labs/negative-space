@@ -33,6 +33,8 @@ src/
   lib/pdf.ts            jsPDF report (vector, no rasterised canvas)
   lib/exports.ts        CSV, and the JSON project file
   lib/panels.ts         cabinet presets
+  lib/livepremier.ts    surfaces -> an Analog Way LivePremier screen. TRANSLATES ONLY
+  vendor/aquilon-pitch/ aquilon-pitch's engine, copied whole. DO NOT EDIT IN PLACE
   lib/units.ts          metric/imperial at the edges only
   components/Canvas.tsx the plan view; the SVG viewBox IS the canvas
   App.tsx               wiring, all the state
@@ -129,6 +131,31 @@ preserved exactly is the **aspect ratio**, and therefore the proportional positi
 surface and every gap — which is what matters for layout. `slideGeometry` clamps the long
 side and lets the other follow, and a test asserts the aspect survives the clamp.
 
+### The vendored pitch engine is not ours to edit
+
+`src/vendor/aquilon-pitch/` is a copy of that repo's `src/lib/`, with a `MANIFEST.json` of
+per-file hashes. `livepremier.test.ts` fails if a file was edited here, and separately if it
+has drifted from an upstream checkout beside this repo. Fix things upstream and
+`npm run sync:pitch-engine`.
+
+It is vendored as **TypeScript source** because this repo is TypeScript and keeps the types;
+livepremier-plus is plain JavaScript and vendors that repo's bundled `dist-lib/` build
+instead. Same engine, two shapes.
+
+`lib/livepremier.ts` translates and does no device arithmetic — keep it that way. The four
+device facts it leans on (the ratio multiplies; thousandths, 0.100–10.000; out-of-range is
+discarded not clamped; the footprint floors) are asserted in the test file so they cannot
+quietly change underneath this repo.
+
+### The LivePremier canvas is NOT necessarily this project's canvas
+
+The plan always references the **finest** pitch, because a reference below 1.000 sets the
+whole screen upscaling. A project on `coarsest` or `manual` therefore describes a canvas of a
+different size from the one the ratios assume. `canvasesAgree` reports it and
+`referenceRects()` rescales the rectangles so the two halves of the panel mean one canvas.
+Do not "simplify" that by reading `PlacedSurface.rect` directly — it is only the same number
+while the pitches happen to match.
+
 ## 5. Commands
 
 ```bash
@@ -178,6 +205,8 @@ anywhere, and the CSP is what enforces that rather than good intentions.
 | PDF builds for row, grid, single, empty and *broken* designs | **Verified** — generated, rasterised and inspected |
 | Arena actually loads the generated file and slices correctly | **NOT VERIFIED** — never round-tripped through a running Arena |
 | The guide plate lines up on real hardware | **NOT VERIFIED** — no array has been driven from this tool |
+| The LivePremier pitch arithmetic | **Verified upstream** — aquilon-pitch drove a simulator 6.2.73 and pinned it; a hash test here fails if the vendored copy drifts |
+| A LivePremier screen actually built from these ratios | **NOT VERIFIED** — nothing here has been typed into a switcher and looked at |
 
 ## 8. Deliberately not here (yet)
 
