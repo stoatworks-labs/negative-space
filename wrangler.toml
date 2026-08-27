@@ -1,0 +1,18 @@
+# Cloudflare deployment for Negative Space.
+#
+# A static-assets-only Worker: no server code. Plain Vite, built by Cloudflare
+# rather than committed, so `dist/` stays out of git. Set the build command in
+# the Cloudflare project to:
+#
+#   npm ci && npm run build
+#
+# `public/_headers` is copied into dist/ by Vite and carries the CSP and the
+# immutable-cache rule for hashed assets; the assets runtime honours it.
+#
+# `name` must match the Cloudflare project.
+
+name = "negative-space"
+compatibility_date = "2026-07-30"
+
+[assets]
+directory = "./dist"
