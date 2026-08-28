@@ -1,3 +1,9 @@
+> **AI-assisted project.** This codebase was created with [Claude Code](https://claude.com/claude-code).
+> The geometry is arithmetic and is covered by tests, including conservation invariants, and the
+> generated `.pptx` has been opened in real PowerPoint. **The Resolume advanced-output XML has
+> never been round-tripped through a running Arena**, and no array laid out here has been built on
+> site — check one slice against the wall before trusting a show to it. See [Status](#status).
+
 # Negative Space
 
 **A negative-space calculator for LED and projection arrays.** Lay out display surfaces
@@ -92,7 +98,3 @@ CI, but check one slice against the wall before trusting a show to it. See
 ## Licence
 
 MIT. See [LICENSE](LICENSE).
-
----
-
-*Parts of this repository were written with AI assistance.*
