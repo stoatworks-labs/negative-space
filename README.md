@@ -95,6 +95,36 @@ through a running Arena** — the structure conforms to real Arena files and is 
 CI, but check one slice against the wall before trusting a show to it. See
 [docs/resolume-export.md](docs/resolume-export.md).
 
+<!-- selfhost:start -->
+## Run your own copy
+
+Negative Space is a static page, so hosting it yourself is one container serving
+the built files — the same files the hosted copy serves, running somewhere that
+still works when the venue has no internet.
+
+**Docker.** The image is built by this repo's `docker.yml` workflow on every
+push and published as `ghcr.io/stoatworks-labs/negative-space`:
+
+```bash
+docker run -d --name negative-space --restart unless-stopped -p 8541:80 ghcr.io/stoatworks-labs/negative-space:latest
+```
+
+Or `docker compose up -d` with the [`docker-compose.yml`](docker-compose.yml)
+in this repo, which maps the same port. Either way it is then at
+`http://localhost:8541/`.
+
+**Unraid.** Search Community Applications for *Negative Space* — the template is
+[`templates/negative-space.xml`](https://github.com/stoatworks-labs/stoatworks-unraid/blob/main/templates/negative-space.xml)
+in [stoatworks-unraid](https://github.com/stoatworks-labs/stoatworks-unraid), which is what the CA feed reads.
+
+**Stoatworks Burrow** lists it under *Self-hosted*, with the compose file a
+click away.
+
+The `Dockerfile`, `docker-compose.yml`, `docker/` and the workflow are
+generated from `fleet.json` in stoatworks-unraid. Change them there and
+regenerate rather than editing them here.
+<!-- selfhost:end -->
+
 ## Licence
 
 MIT. See [LICENSE](LICENSE).
