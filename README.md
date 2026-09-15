@@ -13,6 +13,10 @@ the array accounts for the space between the screens as though it were pixel sur
 
 Runs entirely in your browser. No account, no backend, nothing uploaded.
 
+![Negative Space with three P2.6 surfaces and 100 mm gaps laid out: the composite canvas, the blank pixels each gap costs, and the Resolume input rects](docs/screenshots/negative-space.png)
+
+<sub>Three 1500 × 1000 mm P2.6 surfaces with 100 mm gaps: a 1805 × 384 composite canvas, 4.3 % of it gap, the blank pixels each gap costs and the rounding error it carries, plus the Resolume input rects and the PowerPoint slide size that fall out of it.</sub>
+
 ## The problem
 
 Three LED walls in a row, 100 mm apart. Each is 576 × 384 px. Lay them out as a
