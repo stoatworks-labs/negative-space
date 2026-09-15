@@ -7,6 +7,10 @@ content laid out across the whole array to behave as though that space were part
 picture — so a graphic sliding across the stage disappears behind each gap and comes out the
 far side at the speed it was really travelling, instead of jumping.
 
+![Negative Space with three P2.6 surfaces and 100 mm gaps laid out: the composite canvas, the blank pixels each gap costs, and the Resolume input rects](screenshots/negative-space.png)
+
+*Three 1500 × 1000 mm P2.6 surfaces with 100 mm gaps: a 1805 × 384 composite canvas, 4.3 % of it gap, the blank pixels each gap costs and the rounding error it carries, plus the Resolume input rects and the PowerPoint slide size that fall out of it.*
+
 To do that, the composition has to be bigger than the sum of the screens. It has to include
 the gaps as blank pixels. This works out how many.
 
