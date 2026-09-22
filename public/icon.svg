@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="Negative Space">
+  <rect width="32" height="32" rx="6" fill="#0a1420"/>
+  <g id="mark">
+    <!-- Two surfaces, and the pixels nobody sees between them counted in. -->
+    <rect x="4.5" y="8.5" width="10" height="15" rx="1.4" fill="#4cc9f0"/>
+    <rect x="19.5" y="8.5" width="8" height="15" rx="1.4" fill="#4cc9f0"/>
+    <rect x="15.6" y="8.5" width="3.2" height="15" rx=".9" fill="#f9c74f"/>
+  </g>
+</svg>
