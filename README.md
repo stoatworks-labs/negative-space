@@ -1,4 +1,5 @@
-> **AI-assisted project.** This codebase was created with [Claude Code](https://claude.com/claude-code).
+> **AI-assisted project.** This codebase was created with [Claude](https://claude.com/claude-code)
+> (Anthropic), directed and reviewed by a human author.
 > The geometry is arithmetic and is covered by tests, including conservation invariants, and the
 > generated `.pptx` has been opened in real PowerPoint. **The Resolume advanced-output XML has
 > never been round-tripped through a running Arena**, and no array laid out here has been built on
