@@ -160,7 +160,7 @@ while the pitches happen to match.
 
 ```bash
 npm run dev       # vite dev server
-npm test          # vitest, 81 tests
+npm test          # vitest, 94 tests
 npm run build     # tsc -b && vite build -> dist/
 ```
 
@@ -198,7 +198,7 @@ anywhere, and the CSP is what enforces that rather than good intentions.
 
 | Claim | Status |
 |---|---|
-| Pitch, gap and canvas maths | **Verified** — 81 tests including the pixel-conservation invariant |
+| Pitch, gap and canvas maths | **Verified** — 94 tests including the pixel-conservation invariant |
 | Equal gaps can differ by a pixel | **Verified** — asserted directly, with the reasoning in the test |
 | Resolume XML vocabulary matches a real Arena 7.27 file | **Verified** — extracted mechanically, asserted in CI |
 | The .pptx opens in PowerPoint without repair | **Verified** — generated and opened in real PowerPoint 2026-08-27 |
@@ -210,8 +210,6 @@ anywhere, and the CSP is what enforces that rather than good intentions.
 
 ## 8. Deliberately not here (yet)
 
-- **No PWA.** The fleet pattern wants `sw.js`, a manifest and generated icons. Skipped for
-  0.1 rather than shipped half-done; a service worker with no icons is console noise.
 - **No About dialog or support footer.** Both are vendored from `stoatworks-backend` and
   generated from its `projects.json`, which has no entry for this repo yet. Copying
   blend-calc's would put another app's name in the dialog. Add the repo to `projects.json`,

@@ -19,6 +19,9 @@ npx tsc -b           # typecheck only
 
 ## Deploy
 
+A push to `main` deploys itself (`.github/workflows/deploy.yml`); doc-only pushes are
+skipped. By hand:
+
 ```bash
 npx wrangler login   # you must run this — it's an account sign-in
 npm run deploy       # build + wrangler deploy
