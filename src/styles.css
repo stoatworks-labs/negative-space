@@ -166,3 +166,6 @@ footer.foot {
   padding: 8px 16px; border-top: 1px solid var(--edge);
   font-size: 11px; color: var(--dim); background: var(--panel);
 }
+
+/* The footer's link to the tool's page on stoatworks-labs.com: the footer's own colour, not browser blue. */
+.foot a { color: inherit; }

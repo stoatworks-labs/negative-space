@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://negative-space.stoatworks-labs.com/sitemap.xml

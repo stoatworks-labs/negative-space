@@ -14,6 +14,8 @@ array treats the space between the screens as though it were pixel surface.
 
 It runs entirely in your browser, with no account to make and nothing uploaded.
 
+It's live at [negative-space.stoatworks-labs.com](https://negative-space.stoatworks-labs.com). There's more on [its page at stoatworks-labs.com](https://stoatworks-labs.com/web-tools/negative-space/), along with the [user guide](https://stoatworks-labs.com/software/negative-space/guide/) and [notes on running it on your own server](https://stoatworks-labs.com/web-tools/self-hosting/).
+
 ![Negative Space with three P2.6 surfaces and 100 mm gaps laid out: the composite canvas, the blank pixels each gap costs, and the Resolume input rects](docs/screenshots/negative-space.png)
 
 <sub>Three 1500 × 1000 mm P2.6 surfaces with 100 mm gaps: a 1805 × 384 composite canvas, 4.3 % of it gap, the blank pixels each gap costs and the rounding error it carries, plus the Resolume input rects and the PowerPoint slide size that fall out of it.</sub>

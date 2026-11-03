@@ -7,7 +7,7 @@
     <title>Negative Space — LED and projection gap calculator</title>
     <meta
       name="description"
-      content="Lay out LED walls and projection surfaces with real physical dimensions and resolutions, and get the composite canvas including the blank pixels in the gaps: Resolume advanced output, guide images, PowerPoint geometry, CSV and a PDF report."
+      content="Lay out LED walls and projection surfaces at their real sizes and get the composite canvas, blank pixels in the gaps included, and a Resolume output file. Free, in your browser."
     />
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230a1420'/%3E%3Crect x='4' y='10' width='9' height='12' fill='%234cc9f0'/%3E%3Crect x='19' y='10' width='9' height='12' fill='%234cc9f0'/%3E%3Crect x='13' y='10' width='6' height='12' fill='%23f9c74f' opacity='0.5'/%3E%3C/svg%3E" />
     <link rel="canonical" href="https://negative-space.stoatworks-labs.com/">
@@ -16,13 +16,45 @@
     <meta property="og:locale" content="en_GB">
     <meta property="og:url" content="https://negative-space.stoatworks-labs.com/">
     <meta property="og:title" content="Negative Space — LED and projection gap calculator">
-    <meta property="og:description" content="Lay out LED walls and projection surfaces, set how far apart they are, and get the composite canvas including the blank pixels in the gaps — Resolume advanced output, guide plates, PowerPoint geometry and a PDF report. Nothing is uploaded.">
+    <meta property="og:description" content="Lay out LED walls and projection surfaces at their real sizes and get the composite canvas, blank pixels in the gaps included, and a Resolume output file. Free, in your browser.">
     <meta property="og:image" content="https://stoatworks-labs.com/thumbs/negative-space.png">
     <meta property="og:image:type" content="image/png">
     <meta property="og:image:width" content="1280">
     <meta property="og:image:height" content="720">
     <meta property="og:image:alt" content="Negative Space — LED and projection gap calculator">
     <meta name="twitter:card" content="summary_large_image">
+    <!-- One entity with the tool's page on stoatworks-labs.com: same @id there. -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "@id": "https://negative-space.stoatworks-labs.com#app",
+        "name": "Negative Space",
+        "url": "https://negative-space.stoatworks-labs.com",
+        "description": "Lay out LED walls and projection surfaces at their real sizes and get the composite canvas, blank pixels in the gaps included, and a Resolume output file. Free, in your browser.",
+        "applicationCategory": "MultimediaApplication",
+        "operatingSystem": "Any (runs in a web browser)",
+        "isAccessibleForFree": true,
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "GBP"
+        },
+        "author": {
+          "@id": "https://stoatworks-labs.com/#organization",
+          "@type": "Organization",
+          "name": "Stoatworks Labs",
+          "url": "https://stoatworks-labs.com/"
+        },
+        "publisher": {
+          "@id": "https://stoatworks-labs.com/#organization"
+        },
+        "sameAs": [
+          "https://stoatworks-labs.com/web-tools/negative-space/",
+          "https://github.com/stoatworks-labs/negative-space"
+        ]
+      }
+    </script>
     <meta name="twitter:image" content="https://stoatworks-labs.com/thumbs/negative-space.png">
     <meta name="theme-color" content="#0a1420" />
     <link rel="manifest" href="/manifest.webmanifest" />
@@ -30,6 +62,18 @@
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   </head>
   <body>
+    <noscript>
+      <h1>Negative Space</h1>
+      <p>The gaps between the screens, as pixels.</p>
+      <p>Lay out your LED walls and projection surfaces with their real physical sizes and resolutions, say how far apart they are, and it works out the composite canvas, blank pixels in the gaps included. Content laid out across the array then treats the space between the screens as if it were pixels, so a graphic crossing the stage disappears behind each gap instead of jumping it. Out come the canvas size, the slice rectangles with the gap offsets already applied, a Resolume Arena advanced-output file, a guide plate at exactly the canvas resolution, PowerPoint slide geometry and a starter deck, a CSV, and a PDF report with a scale plan.</p>
+      <p>Negative Space runs in the browser and needs JavaScript.</p>
+      <ul>
+        <li><a href="https://stoatworks-labs.com/software/negative-space/">Negative Space on stoatworks-labs.com</a></li>
+        <li><a href="https://stoatworks-labs.com/software/negative-space/guide/">User guide</a></li>
+        <li><a href="https://github.com/stoatworks-labs/negative-space">Source on GitHub</a></li>
+        <li><a href="https://stoatworks-labs.com/web-tools/self-hosting/">Running it on your own server</a></li>
+      </ul>
+    </noscript>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

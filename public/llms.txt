@@ -1,0 +1,16 @@
+# Negative Space
+
+> The gaps between the screens, as pixels
+
+Lay out your LED walls and projection surfaces with their real physical sizes and resolutions, say how far apart they are, and it works out the composite canvas, blank pixels in the gaps included. Content laid out across the array then treats the space between the screens as if it were pixels, so a graphic crossing the stage disappears behind each gap instead of jumping it. Out come the canvas size, the slice rectangles with the gap offsets already applied, a Resolume Arena advanced-output file, a guide plate at exactly the canvas resolution, PowerPoint slide geometry and a starter deck, a CSV, and a PDF report with a scale plan.
+
+It's a Stoatworks Labs web tool: free, and it runs in a web browser.
+
+## Links
+
+- [Negative Space, the app](https://negative-space.stoatworks-labs.com/): runs in the browser, free
+- [Project page](https://stoatworks-labs.com/software/negative-space/)
+- [Web tool page](https://stoatworks-labs.com/web-tools/negative-space/)
+- [User guide](https://stoatworks-labs.com/software/negative-space/guide/)
+- [Source on GitHub](https://github.com/stoatworks-labs/negative-space)
+- [Self-hosting](https://stoatworks-labs.com/web-tools/self-hosting/): run it on your own server

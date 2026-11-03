@@ -691,6 +691,8 @@ export default function App() {
         {selected
           ? `${selected.name} — ${selected.widthMm} × ${selected.heightMm} mm, ${selected.pxWidth} × ${selected.pxHeight} px`
           : 'Everything runs in your browser. Nothing you type is uploaded.'}
+        {' · '}
+        <a href="https://stoatworks-labs.com/web-tools/negative-space/" target="_blank" rel="noopener">More about Negative Space</a>
       </footer>
     </div>
   )
