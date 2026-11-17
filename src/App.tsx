@@ -256,6 +256,11 @@ export default function App() {
           />
           <span className="sw-btn">Open…</span>
         </label>
+        {/* Opens the shared About dialog — see public/about.js, which delegates
+            this attribute from the document, so nothing needs importing here. */}
+        <button type="button" data-stoatworks-about>
+          About
+        </button>
       </header>
 
       <main className="body">

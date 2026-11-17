@@ -42,10 +42,11 @@ assertion was wrong. Now pinned by a test named in capitals so nobody "fixes" it
 
 - **No PWA.** Needs `sw.js`, `manifest.webmanifest` and generated icons — see the fleet PWA
   pattern note. Skipped rather than half-shipped.
-- **No About dialog or support footer.** Vendored from `stoatworks-backend/about` and
-  `support-footer`, generated from its `projects.json`. Add this repo there, run the sync
-  scripts, then restore the version-stamping plugin in `vite.config.ts` (blend-calc's copy
-  is the model).
+- **No support footer.** The About dialog is here: `public/about.js` and
+  `public/about-data.js` are vendored by `stoatworks-backend`'s `sync-about.py`, and
+  `src/main.tsx` hands it the build's version. The support footer (`stoatworks-backend/
+  support-footer`) is not synced in yet. Run that sync for this repo, then restore the
+  version-stamping plugin in `vite.config.ts` (blend-calc's copy is the model).
 - **No `ATTRIBUTIONS.md`.** The fleet's `sync-attributions.py` should be run once the repo
   is registered.
 - **The Resolume file has never been opened in Arena.** The single most valuable next check.

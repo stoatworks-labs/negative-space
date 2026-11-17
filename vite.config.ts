@@ -7,10 +7,10 @@ const pkg = JSON.parse(readFileSync(new URL('./package.json', import.meta.url), 
 
 // Static SPA. Output goes to dist/ which is what Cloudflare publishes.
 //
-// No support-footer version-stamping plugin here yet, unlike blend-calc: this
-// repo is not in the backend's projects.json, so public/about-data.js and
-// public/support-footer.js have not been generated for it. Vendoring blend-calc's
-// copies would put another app's name in the About dialog. See docs/NOTES.md.
+// No support-footer version-stamping plugin here yet, unlike blend-calc:
+// public/support-footer.js has not been synced into this repo. The About dialog
+// has (public/about.js and about-data.js, from stoatworks-backend's
+// sync-about.py), and src/main.tsx hands it __APP_VERSION__. See docs/NOTES.md.
 export default defineConfig({
   define: { __APP_VERSION__: JSON.stringify(`v${pkg.version}`) },
   plugins: [react()],

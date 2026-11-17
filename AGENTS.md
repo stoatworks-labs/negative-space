@@ -210,10 +210,11 @@ anywhere, and the CSP is what enforces that rather than good intentions.
 
 ## 8. Deliberately not here (yet)
 
-- **No About dialog or support footer.** Both are vendored from `stoatworks-backend` and
-  generated from its `projects.json`, which has no entry for this repo yet. Copying
-  blend-calc's would put another app's name in the dialog. Add the repo to `projects.json`,
-  run the sync scripts, then re-add the version-stamping plugin to `vite.config.ts`.
+- **No support footer.** The About dialog is here: `public/about.js` and
+  `public/about-data.js` are vendored by `stoatworks-backend`'s `sync-about.py`, and
+  `src/main.tsx` hands it the build's version. The support footer, vendored from the same
+  repo's `support-footer`, is not synced in yet. Run that sync for this repo, then re-add
+  the version-stamping plugin to `vite.config.ts` (blend-calc's copy is the model).
 - **No backend.** Adding one would change the deployment story for no functional gain.
 
 ## Notes
