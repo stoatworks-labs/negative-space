@@ -194,9 +194,9 @@ export default function App() {
 
   return (
     <div className="app">
-      <header className="top">
-        <h1>
-          Negative <span>Space</span>
+      <header className="top sw-bar">
+        <h1 className="sw-brand">
+          <span className="sw-mark" aria-hidden="true">◫</span> Negative Space
         </h1>
         <input
           type="text"
@@ -206,7 +206,7 @@ export default function App() {
           onChange={(e) => setProject((p) => ({ ...p, name: e.target.value }))}
         />
         <label style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 12 }}>
-          <span style={{ color: 'var(--dim)' }}>Canvas pitch</span>
+          <span className="bar-label">Canvas pitch</span>
           <select
             style={{ width: 190 }}
             value={project.pitch.mode}
@@ -254,16 +254,7 @@ export default function App() {
               e.target.value = ''
             }}
           />
-          <span
-            style={{
-              padding: '6px 10px',
-              border: '1px solid var(--edge)',
-              borderRadius: 6,
-              display: 'inline-block',
-            }}
-          >
-            Open…
-          </span>
+          <span className="sw-btn">Open…</span>
         </label>
       </header>
 

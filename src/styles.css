@@ -1,18 +1,27 @@
+/* Colours come from the shared Stoatworks theme (stoatworks-theme.css, imported first),
+   so the page follows the system's light or dark setting. The plan view stays dark on
+   the stage in both modes. */
 :root {
-  --bg: #0a1420;
-  --panel: #0f1c2b;
-  --panel-2: #142438;
-  --edge: #24374f;
-  --ink: #e8eef6;
-  --dim: #93a4b8;
-  --accent: #4cc9f0;
-  --gap: #f9c74f;
-  --bad: #f28b82;
-  --warn: #f9c74f;
-  --ok: #90be6d;
-  --radius: 8px;
-  color-scheme: dark;
+  --bg: var(--sw-paper);
+  --panel: var(--sw-card);
+  --panel-2: var(--sw-tint);
+  --edge: var(--sw-line);
+  --edge-soft: color-mix(in srgb, var(--sw-line) 60%, transparent);
+  --ink: var(--sw-ink);
+  --dim: var(--sw-muted);
+  --accent: var(--sw-accent);
+  --bad: var(--sw-bad);
+  --warn: var(--sw-warn);
+  --ok: var(--sw-ok);
+  --radius: var(--sw-radius);
+  /* The gap amber means something here: it is the blank pixels between screens. A darker
+     amber reads on paper; the dark-mode one matches the gap bands on the plan view. */
+  --gap: #8f6200;
 }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --gap: #f9c74f; }
+}
+:root[data-theme="dark"] { --gap: #f9c74f; }
 
 * { box-sizing: border-box; }
 
@@ -21,18 +30,14 @@ html, body, #root { height: 100%; margin: 0; }
 body {
   background: var(--bg);
   color: var(--ink);
-  font: 14px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  font: 14px/1.45 var(--sw-font);
 }
 
 .app { display: flex; flex-direction: column; height: 100%; }
 
-header.top {
-  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
-  padding: 10px 16px; border-bottom: 1px solid var(--edge); background: var(--panel);
-}
-header.top h1 { font-size: 15px; margin: 0; letter-spacing: .2px; }
-header.top h1 span { color: var(--accent); }
+/* The navy bar (sw-bar) carries the name and the project controls. */
 header.top .grow { flex: 1; }
+header.top .bar-label { color: var(--sw-navy-ink-2); }
 
 main.body { flex: 1; display: flex; min-height: 0; }
 
@@ -50,8 +55,7 @@ main.body { flex: 1; display: flex; min-height: 0; }
 
 section.block { padding: 12px 14px; border-bottom: 1px solid var(--edge); }
 section.block > h2 {
-  font-size: 11px; text-transform: uppercase; letter-spacing: .09em;
-  color: var(--dim); margin: 0 0 10px; font-weight: 600;
+  font-size: 13px; color: var(--ink); margin: 0 0 10px; font-weight: 700;
 }
 
 label.field { display: block; margin-bottom: 8px; }
@@ -60,8 +64,8 @@ label.field > span { display: block; font-size: 11px; color: var(--dim); margin-
 input, select, button, textarea { font: inherit; color: inherit; }
 
 input[type="text"], input[type="number"], select {
-  width: 100%; padding: 6px 8px; background: var(--bg);
-  border: 1px solid var(--edge); border-radius: 6px; color: var(--ink);
+  width: 100%; padding: 6px 8px; background: var(--panel);
+  border: 1px solid var(--edge); border-radius: var(--sw-radius-sm); color: var(--ink);
 }
 input:focus, select:focus, button:focus-visible {
   outline: 2px solid var(--accent); outline-offset: 1px;
@@ -71,11 +75,12 @@ input:focus, select:focus, button:focus-visible {
 .row > * { flex: 1; min-width: 0; }
 
 button {
-  padding: 6px 10px; background: var(--panel-2); border: 1px solid var(--edge);
-  border-radius: 6px; cursor: pointer;
+  padding: 6px 10px; background: var(--panel); border: 1px solid var(--edge);
+  border-radius: var(--sw-radius-sm); cursor: pointer;
 }
 button:hover { border-color: var(--accent); }
-button.primary { background: var(--accent); border-color: var(--accent); color: #06202b; font-weight: 600; }
+button.primary { background: var(--accent); border-color: var(--accent); color: var(--sw-on-accent); font-weight: 600; }
+button.primary:hover { filter: brightness(1.08); }
 button.ghost { background: transparent; }
 button.danger:hover { border-color: var(--bad); color: var(--bad); }
 button:disabled { opacity: .45; cursor: not-allowed; }
@@ -96,7 +101,7 @@ button:disabled { opacity: .45; cursor: not-allowed; }
   display: flex; justify-content: space-between; gap: 8px;
 }
 
-.canvas-wrap { flex: 1; min-height: 0; position: relative; background: #060d16; }
+.canvas-wrap { flex: 1; min-height: 0; position: relative; background: var(--sw-stage); color: var(--sw-stage-ink); }
 .canvas-wrap svg { width: 100%; height: 100%; display: block; touch-action: none; }
 .canvas-bar {
   display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
@@ -121,23 +126,23 @@ table.data th {
   text-align: left; font-size: 10px; text-transform: uppercase; letter-spacing: .06em;
   color: var(--dim); font-weight: 600; padding: 4px 6px 4px 0; border-bottom: 1px solid var(--edge);
 }
-table.data td { padding: 4px 6px 4px 0; border-bottom: 1px solid #182739; }
+table.data td { padding: 4px 6px 4px 0; border-bottom: 1px solid var(--edge-soft); }
 table.data td.num, table.data th.num { text-align: right; font-variant-numeric: tabular-nums; }
 table.data tr.clickable { cursor: pointer; }
 table.data tr.clickable:hover td { color: var(--accent); }
 
 ul.diags { list-style: none; margin: 0; padding: 0; }
 ul.diags li {
-  display: flex; gap: 8px; padding: 6px 0; border-bottom: 1px solid #182739; font-size: 12px;
+  display: flex; gap: 8px; padding: 6px 0; border-bottom: 1px solid var(--edge-soft); font-size: 12px;
 }
 ul.diags li:last-child { border-bottom: 0; }
 ul.diags .tag {
   flex: none; font-size: 9px; font-weight: 700; letter-spacing: .06em;
   text-transform: uppercase; padding: 2px 5px; border-radius: 4px; height: fit-content;
 }
-.tag.error { background: rgba(242,139,130,.16); color: var(--bad); }
-.tag.warning { background: rgba(249,199,79,.16); color: var(--warn); }
-.tag.note { background: rgba(147,164,184,.16); color: var(--dim); }
+.tag.error { background: color-mix(in srgb, var(--bad) 16%, transparent); color: var(--bad); }
+.tag.warning { background: color-mix(in srgb, var(--warn) 16%, transparent); color: var(--warn); }
+.tag.note { background: color-mix(in srgb, var(--dim) 16%, transparent); color: var(--dim); }
 
 /* LivePremier pitch compensation. Ratios are read against each other down the
    column, so tabular figures and right alignment on every number. */
@@ -148,11 +153,11 @@ table.lp-table th {
   padding: 4px 8px 4px 0; border-bottom: 1px solid var(--edge);
 }
 table.lp-table td {
-  padding: 5px 8px 5px 0; border-bottom: 1px solid #182739;
+  padding: 5px 8px 5px 0; border-bottom: 1px solid var(--edge-soft);
   font-variant-numeric: tabular-nums;
 }
 table.lp-table th:not(:first-child), table.lp-table td:not(:first-child) { text-align: right; }
-table.lp-table tr.is-ref { background: rgba(147,164,184,.06); }
+table.lp-table tr.is-ref { background: color-mix(in srgb, var(--ink) 5%, transparent); }
 table.lp-table .tag { margin-left: 6px; font-size: 9px; padding: 1px 4px; border-radius: 3px; }
 table.lp-table td.bad { color: var(--bad); }
 
@@ -169,3 +174,17 @@ footer.foot {
 
 /* The footer's link to the tool's page on stoatworks-labs.com: the footer's own colour, not browser blue. */
 .foot a { color: inherit; }
+
+/* Controls on the navy bar. The rules above are unlayered, so they beat the theme's
+   bar styles; restate those here for the bar's own fields and buttons. */
+.sw-bar input[type="text"], .sw-bar input[type="number"], .sw-bar select {
+  background: var(--sw-navy-tint); color: var(--sw-navy-ink); border-color: var(--sw-navy-line);
+}
+.sw-bar select option { background: var(--sw-card); color: var(--sw-ink); }
+.sw-bar button, .sw-bar .sw-btn {
+  display: inline-block; padding: 6px 12px; background: transparent; color: var(--sw-navy-ink);
+  border: 1px solid var(--sw-navy-line); border-radius: var(--sw-radius-sm);
+}
+.sw-bar button:hover, .sw-bar label:hover .sw-btn { border-color: var(--sw-accent-soft); }
+.sw-bar :focus-visible, .sw-bar input:focus, .sw-bar select:focus { outline-color: var(--sw-accent-soft); }
+.canvas-wrap .empty { color: color-mix(in srgb, var(--sw-stage-ink) 65%, transparent); }
